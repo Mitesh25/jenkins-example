@@ -35,6 +35,21 @@ pipeline {
 					}
 				}
 			}
+			stage('Sonarqube and install') {
+				environment {
+					scannerHome = tool 'SonarQubeScanner'
+				}
+				steps {
+					withSonarQubeEnv('jenkins-int') {
+						withMaven(maven: 'My_Maven') {
+							sh 'mvn clean install sonar:sonar'
+						}
+					}
+					timeout(time: 10, unit: 'MINUTES') {
+					waitForQualityGate abortPipeline: true
+					}
+				}
+			}
 	//		stage ('Install Source Code') {
 	//			steps {
 	//				withMaven(maven: 'My_Maven') {
