@@ -35,12 +35,12 @@ pipeline {
 					}
 				}
 			}
-			stage ('Install Source Code') {
-				steps {
-					withMaven(maven: 'My_Maven') {
-						sh 'mvn install'
-					}
-				}
-			}
+	//		stage ('Install Source Code') {
+	//			steps {
+	//				withMaven(maven: 'My_Maven') {
+	//					sh 'mvn install'
+	//				}
+	//			}
+	//		}
 			
 	}}
